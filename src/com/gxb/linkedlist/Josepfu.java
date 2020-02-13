@@ -6,7 +6,6 @@ public class Josepfu {
         CircleSingleLinkedList circleSingleLinkedList = new CircleSingleLinkedList();
         circleSingleLinkedList.addBoy(5);
         circleSingleLinkedList.countBoy(1, 2, 5);
-
     }
 }
 
@@ -15,7 +14,6 @@ class CircleSingleLinkedList {
 
     //创建一个first节点，当前没有编号
     private Boy first;
-
     /**
      * @param startNo 表示从第几个小孩开始数数
      * @param countNum 表示数几下
