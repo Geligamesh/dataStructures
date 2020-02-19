@@ -22,7 +22,7 @@ public class MIGong {
         map[3][2] = 1;
 
         list(map);
-        setWay(map, 1, 1);
+        setWay2(map, 1, 1);
         System.out.println("小球走过，并标识过的地图情况");
         list(map);
     }
@@ -65,6 +65,40 @@ public class MIGong {
                 }else if (setWay(map, i - 1, j)) {//向上走
                     return true;
                 }else if (setWay(map, i, j - 1)) {//向左走
+                    return true;
+                }else {
+                    //说明该点是走不通的，是死路
+                    map[i][j] = 3;
+                    return false;
+                }
+            }else {//如果map[i][j] != 0,可能是1,2,3
+                return false;
+            }
+        }
+    }
+
+    /**
+     *
+     * @param map
+     * @param i
+     * @param j
+     * @return
+     * 在走迷宫时，需要确定一个策略（方法）上-》右-》下-》左，如果该点走不通，再回溯
+     */
+    public static boolean setWay2(int[][] map,int i,int j) {
+        if (map[6][5] == 2) {//通路已经找到
+            return true;
+        }else {
+            if (map[i][j] == 0) {//如果当前这个点还没有走过
+                //按照一个策略（方法）下-》右-》上-》左
+                map[i][j] = 2;//假定该点是可以走通的
+                if (setWay2(map, i - 1, j)) {//向下走
+                    return true;
+                }else if (setWay2(map, i, j + 1)) {//向右走
+                    return true;
+                }else if (setWay2(map, i + 1, j)) {//向上走
+                    return true;
+                }else if (setWay2(map, i, j - 1)) {//向左走
                     return true;
                 }else {
                     //说明该点是走不通的，是死路
