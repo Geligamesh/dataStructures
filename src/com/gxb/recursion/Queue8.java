@@ -14,7 +14,6 @@ public class Queue8 {
         queue8.check(0);
         System.out.printf("一共有%d解法", count);//92
         System.out.printf("一共判断冲突的次数%d次", judgeCount); // 15720
-
     }
 
     //编写一个方法，放置第n个皇后
@@ -66,6 +65,53 @@ public class Queue8 {
             System.out.print(array[i] + " ");
         }
         System.out.println();
+    }
+
+    private static class DeadQueue8 {
+
+        int max = 8;
+        int[] array = new int[max];
+        int count = 0;
+        int judgeCount = 0;
+
+        public static void main(String[] args) {
+            DeadQueue8 deadQueue8 = new DeadQueue8();
+            deadQueue8.check(0);
+            System.out.println("count=" + deadQueue8.count);
+            System.out.println("judgeCount=" + deadQueue8.judgeCount);
+
+        }
+
+        private void print() {
+            for (int i = 0; i < array.length; i++) {
+                System.out.printf("%d ",array[i]);
+            }
+            System.out.println();
+        }
+
+        private void check(int n) {
+            if (n == max) {
+                count++;
+                print();
+                return;
+            }
+            for (int i = 0; i < max; i++) {
+                array[n] = i;
+                if (judge(n)) {
+                    check(n + 1);
+                }
+            }
+        }
+
+        private boolean judge(int n) {
+            judgeCount++;
+            for (int i = 0; i < n; i++) {
+                if (array[i] == array[n] || Math.abs(i - n) == Math.abs(array[i] - array[n])) {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
 }
